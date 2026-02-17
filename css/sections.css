@@ -24,6 +24,24 @@
     width: auto;
 }
 
+.nav__logo-text {
+    font-family: var(--font-headline);
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--text);
+    text-transform: uppercase;
+}
+
+.footer__logo-text {
+    font-family: var(--font-headline);
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--text);
+    text-transform: uppercase;
+}
+
 .nav__links {
     display: flex;
     gap: var(--space-md);
