@@ -1,3 +1,39 @@
+/* ── Add Reveal Classes via JS ────────────── */
+/* Applied via JS so content is visible if JS fails */
+const revealSelectors = [
+    { sel: '.hero__eyebrow', delay: 0 },
+    { sel: '.hero__headline', delay: 1 },
+    { sel: '.hero__sub', delay: 2 },
+    { sel: '.hero__ctas', delay: 3 },
+    { sel: '.stats__item', stagger: true },
+    { sel: '.services__headline', delay: 0 },
+    { sel: '.card', stagger: true },
+    { sel: '.process__headline', delay: 0 },
+    { sel: '.process__sub', delay: 1 },
+    { sel: '.process__step', stagger: true },
+    { sel: '.philosophy__headline', delay: 0 },
+    { sel: '.philosophy__text', stagger: true },
+    { sel: '.contact__headline', delay: 0 },
+    { sel: '.contact__sub', delay: 1 },
+    { sel: '.contact__form', delay: 2 },
+];
+
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (!prefersReducedMotion) {
+    revealSelectors.forEach(({ sel, delay, stagger }) => {
+        const els = document.querySelectorAll(sel);
+        els.forEach((el, i) => {
+            el.classList.add('reveal');
+            if (stagger) {
+                el.classList.add(`delay-${Math.min(i + 1, 4)}`);
+            } else if (delay) {
+                el.classList.add(`delay-${delay}`);
+            }
+        });
+    });
+}
+
 /* ── Scroll Reveal ────────────────────────── */
 const reveals = document.querySelectorAll('.reveal');
 
@@ -45,33 +81,3 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
-
-/* ── Contact Form AJAX ───────────────────── */
-const form = document.getElementById('contact-form');
-if (form) {
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const data = new FormData(form);
-        const btn = form.querySelector('button[type="submit"]');
-        const originalText = btn.textContent;
-        btn.textContent = 'Sending...';
-        btn.disabled = true;
-
-        try {
-            const res = await fetch('/contact', { method: 'POST', body: data });
-            if (res.ok) {
-                const html = await res.text();
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                const newContact = doc.getElementById('contact');
-                const oldContact = document.getElementById('contact');
-                if (newContact && oldContact) {
-                    oldContact.replaceWith(newContact);
-                }
-            }
-        } catch {
-            btn.textContent = originalText;
-            btn.disabled = false;
-        }
-    });
-}

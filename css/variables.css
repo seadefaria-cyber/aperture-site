@@ -1,11 +1,13 @@
 :root {
     /* Core palette */
-    --bg: #050505;
-    --surface: #0a0a0a;
-    --text: #ffffff;
-    --text-muted: #888888;
-    --accent: #fed446;
-    --accent-glow: rgba(254, 212, 70, 0.3);
+    --bg: #FAFAF8;
+    --surface: #F0EFEC;
+    --text: #1A1A1A;
+    --text-muted: #6B6B6B;
+    --accent: #2B5CE6;
+    --accent-glow: rgba(43, 92, 230, 0.15);
+    --border: #E0DFDC;
+    --border-light: #EEEDEB;
 
     /* Fonts */
     --font-headline: 'Bebas Neue', Impact, sans-serif;
